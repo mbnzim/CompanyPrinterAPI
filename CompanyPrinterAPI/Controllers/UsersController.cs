@@ -4,9 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using DataAccess;
 using Businesslogic;
 using BusinessObject;
@@ -44,6 +41,12 @@ namespace CompanyPrinterAPI.Controllers
             {
                 return "Failed to Add!!";
             }
+        }
+        [Route("api/Users/SearchUser")]
+        [HttpGet]
+        public HttpResponseMessage Get(string username)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, userBL.searchUser(username));
         }
     }
 }

@@ -33,6 +33,7 @@ namespace DataAccess
                 SqlCommand cmd = new SqlCommand("dbo.AddDesignation", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@designationName", designation.DesignationName);
+                cmd.Parameters.AddWithValue("@status", designation.Status);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);    
@@ -45,6 +46,7 @@ namespace DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@designationID", designation.DesignationID);
             cmd.Parameters.AddWithValue("@designationName", designation.DesignationName);
+            cmd.Parameters.AddWithValue("@status", designation.Status);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
@@ -112,7 +114,56 @@ namespace DataAccess
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
+
+        public DataTable SearchUser(string username)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.searchUser", con);
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            cmd.Dispose();
+            return dt;
+        }
         //---------------------------------------PrinterMake---------------------------------------
+        public DataTable GetAllPrinterMake()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.GetAllPrinterMake", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            cmd.Dispose();
+            return dt;
+        }
+
+        public void AddPrinterMake(PrinterMake printerMake)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.AddPrinterMake", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@PrinterMakeName", printerMake.PrinterMakeName);
+            cmd.Parameters.AddWithValue("@Status", printerMake.Status);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+
+        public void UpdatePrinterMake(PrinterMake printerMake)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.UpdatePrinterMake", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@printerMakeID", printerMake.PrinterMakeID);
+            cmd.Parameters.AddWithValue("@PrinterMakeName", printerMake.PrinterMakeName);
+            cmd.Parameters.AddWithValue("@Status", printerMake.Status);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
 
     }
 }

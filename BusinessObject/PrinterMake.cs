@@ -7,7 +7,8 @@ namespace BusinessObject
 {
     public class PrinterMake
     {
-       // public int PrinterMakeID { get; set; }
+        public int PrinterMakeID { get; set; }
         public string PrinterMakeName { get; set; }
+        public byte Status { get; set; }
     }
 }

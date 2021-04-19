@@ -9,5 +9,6 @@ namespace BusinessObject
     {
         public int DesignationID { get; set; }
         public string DesignationName { get; set; }
+        public byte Status { get; set; }
     }
 }

@@ -95,5 +95,54 @@ namespace Businesslogic
                 throw ex;
             }
         }
+
+        public DataTable searchUser(string username)
+        {
+            try
+            {
+
+                return userDA.SearchUser(username);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        //-----------------------------------PrinterMake-------------------------------
+        public DataTable getAllPrinterMake()
+        {
+            try
+            {
+
+                return userDA.GetAllPrinterMake();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void addPrinterMake(PrinterMake printerMake)
+        {
+            try
+            {
+                userDA.AddPrinterMake(printerMake);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void updatePrinter(PrinterMake printerMake)
+        {
+            try
+            {
+                userDA.UpdatePrinterMake(printerMake);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
