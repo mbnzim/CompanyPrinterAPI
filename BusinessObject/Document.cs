@@ -7,7 +7,7 @@ namespace BusinessObject
 {
     public class Document
     {
-
+        public int DocID { get; set; }
         public int printerID { get; set; }
         public int userID { get; set; }
         public string DocType { get; set; }

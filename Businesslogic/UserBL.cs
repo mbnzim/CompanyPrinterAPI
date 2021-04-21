@@ -144,5 +144,79 @@ namespace Businesslogic
                 throw ex;
             }
         }
+
+
+        //-----------------------------------Printer-------------------------------
+        public DataTable getAllPrinters()
+        {
+            try
+            {
+
+                return userDA.GetAllPrinters();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void addPrinter(Printer printer)
+        {
+            try
+            {
+                userDA.AddPrinter(printer);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void updatePrinter(Printer printer)
+        {
+            try
+            {
+                userDA.UpdatePrinter(printer);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        //-----------------------------------Documents-------------------------------
+        public DataTable getAllDocuments()
+        {
+            try
+            {
+
+                return userDA.GetAllDocuments();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void addDoc(Document doc)
+        {
+            try
+            {
+                userDA.AddDocuments(doc);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void updateDoc(Document doc)
+        {
+            try
+            {
+                userDA.UpdateDocument(doc);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

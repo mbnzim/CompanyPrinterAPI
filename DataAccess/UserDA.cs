@@ -27,19 +27,19 @@ namespace DataAccess
             return dt;
         }
 
-        public void AddDesignation(Designation designation)
+        public int AddDesignation(Designation designation)
         {         
                 con.Open();
                 SqlCommand cmd = new SqlCommand("dbo.AddDesignation", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@designationName", designation.DesignationName);
                 cmd.Parameters.AddWithValue("@status", designation.Status);
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);    
+                int Result = cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                return Result;   
         }
 
-        public void UpdateDesignation(Designation designation)
+        public int UpdateDesignation(Designation designation)
         {
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.UpdateDesignation", con);
@@ -47,20 +47,20 @@ namespace DataAccess
             cmd.Parameters.AddWithValue("@designationID", designation.DesignationID);
             cmd.Parameters.AddWithValue("@designationName", designation.DesignationName);
             cmd.Parameters.AddWithValue("@status", designation.Status);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
         }
 
-        public void DeleteDesignation(int id)
+        public int DeleteDesignation(int id)
         {
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.DeleteDesignation", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@designationID", id);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
         }
 
         //---------------------------------------User---------------------------------------
@@ -75,7 +75,7 @@ namespace DataAccess
             cmd.Dispose();
             return dt;
         }
-        public void AddUsers(CreateUser user)
+        public int AddUsers(CreateUser user)
         {
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.AddNewUser", con);
@@ -90,11 +90,11 @@ namespace DataAccess
             cmd.Parameters.AddWithValue("@dob", user.DOB);
             cmd.Parameters.AddWithValue("@createddate", user.CreatedDate);
             cmd.Parameters.AddWithValue("@LastModificationDate", user.LastModificationDate);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
         }
-        public void UpdateUsers(CreateUser user)
+        public int UpdateUsers(CreateUser user)
         {
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.UpdateUser", con);
@@ -110,9 +110,9 @@ namespace DataAccess
             cmd.Parameters.AddWithValue("@dob", user.DOB);
             cmd.Parameters.AddWithValue("@createddate", user.CreatedDate);
             cmd.Parameters.AddWithValue("@LastModificationDate", user.LastModificationDate);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
         }
 
         public DataTable SearchUser(string username)
@@ -140,19 +140,19 @@ namespace DataAccess
             return dt;
         }
 
-        public void AddPrinterMake(PrinterMake printerMake)
+        public int AddPrinterMake(PrinterMake printerMake)
         {
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.AddPrinterMake", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@PrinterMakeName", printerMake.PrinterMakeName);
             cmd.Parameters.AddWithValue("@Status", printerMake.Status);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
         }
 
-        public void UpdatePrinterMake(PrinterMake printerMake)
+        public int UpdatePrinterMake(PrinterMake printerMake)
         {
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.UpdatePrinterMake", con);
@@ -160,10 +160,105 @@ namespace DataAccess
             cmd.Parameters.AddWithValue("@printerMakeID", printerMake.PrinterMakeID);
             cmd.Parameters.AddWithValue("@PrinterMakeName", printerMake.PrinterMakeName);
             cmd.Parameters.AddWithValue("@Status", printerMake.Status);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
+        }
+
+        //---------------------------------------Printers---------------------------------------
+        public DataTable GetAllPrinters()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.GetAllPRinters", con);
+            cmd.CommandType = CommandType.StoredProcedure;
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
+            cmd.Dispose();
+            return dt;
         }
 
+        public int AddPrinter(Printer printer)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.AddPrinters", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@PrinterName", printer.PrinterName);
+            cmd.Parameters.AddWithValue("@FolderToMonitor", printer.FolderToMonitor);
+            cmd.Parameters.AddWithValue("@OutputType", printer.OutputType);
+            cmd.Parameters.AddWithValue("@FileOutput", printer.FileOutput);
+            cmd.Parameters.AddWithValue("@PrinterMakeID", printer.PrinterMakeID);
+            cmd.Parameters.AddWithValue("@Active", printer.Active);
+            cmd.Parameters.AddWithValue("@Status", printer.Status);
+            cmd.Parameters.AddWithValue("@CreatedDate", printer.CreatedDate);
+            cmd.Parameters.AddWithValue("@LastModificationDate", printer.LastModificationDate);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
+        }
+
+        public int UpdatePrinter(Printer printer)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.UpdatePrinters", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@PrintersID", printer.PrinterID);
+            cmd.Parameters.AddWithValue("@PrinterName", printer.PrinterName);
+            cmd.Parameters.AddWithValue("@FolderToMonitor", printer.FolderToMonitor);
+            cmd.Parameters.AddWithValue("@OutputType", printer.OutputType);
+            cmd.Parameters.AddWithValue("@FileOutput", printer.FileOutput);
+            cmd.Parameters.AddWithValue("@PrinterMakeID", printer.PrinterMakeID);
+            cmd.Parameters.AddWithValue("@Active", printer.Active);
+            cmd.Parameters.AddWithValue("@Status", printer.Status);
+            cmd.Parameters.AddWithValue("@CreatedDate", printer.CreatedDate);
+            cmd.Parameters.AddWithValue("@LastModificationDate", printer.LastModificationDate);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
+        }
+
+        //---------------------------------------Documents---------------------------------------
+        public DataTable GetAllDocuments()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.GetAllDocuments", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            cmd.Dispose();
+            return dt;
+        }
+
+        public int AddDocuments(Document docs)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.UploadDoc", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@printerID", docs.printerID);
+            cmd.Parameters.AddWithValue("@userID", docs.userID);
+            cmd.Parameters.AddWithValue("@docType", docs.DocType);
+            cmd.Parameters.AddWithValue("@docUrl", docs.DocUrl);
+            cmd.Parameters.AddWithValue("@createdDate", docs.CreatedDate);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
+        }
+
+        public int UpdateDocument(Document docs)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.UpdateDoc", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@docId", docs.DocID);
+            cmd.Parameters.AddWithValue("@printerID", docs.printerID);
+            cmd.Parameters.AddWithValue("@userID", docs.userID);
+            cmd.Parameters.AddWithValue("@docType", docs.DocType);
+            cmd.Parameters.AddWithValue("@docUrl", docs.DocUrl);
+            cmd.Parameters.AddWithValue("@createdDate", docs.CreatedDate);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
+        }
     }
 }
