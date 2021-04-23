@@ -77,6 +77,9 @@ namespace DataAccess
         }
         public int AddUsers(CreateUser user)
         {
+            user.CreatedDate = DateTime.Now;
+            user.LastModificationDate = DateTime.Now;
+
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.AddNewUser", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -95,7 +98,9 @@ namespace DataAccess
             return Result;
         }
         public int UpdateUsers(CreateUser user)
-        {
+        {   
+             user.CreatedDate = DateTime.Now;
+            user.LastModificationDate = DateTime.Now;
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.UpdateUser", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -114,6 +119,18 @@ namespace DataAccess
             cmd.Dispose();
             return Result;
         }
+
+        public int DeleteUsers(int id)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.DeleteUser", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@userID",id);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
+        }
+
 
         public DataTable SearchUser(string username)
         {
@@ -180,6 +197,9 @@ namespace DataAccess
 
         public int AddPrinter(Printer printer)
         {
+            printer.CreatedDate = DateTime.Now;
+            printer.LastModificationDate = DateTime.Now;
+            printer.Status = 1;
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.AddPrinters", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -199,10 +219,13 @@ namespace DataAccess
 
         public int UpdatePrinter(Printer printer)
         {
+            //printer.CreatedDate = DateTime.Now;
+            printer.LastModificationDate = DateTime.Now;
+            printer.Status = 1;
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.UpdatePrinters", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@PrintersID", printer.PrinterID);
+            cmd.Parameters.AddWithValue("@PrintersID", printer.EngenPrintersID);
             cmd.Parameters.AddWithValue("@PrinterName", printer.PrinterName);
             cmd.Parameters.AddWithValue("@FolderToMonitor", printer.FolderToMonitor);
             cmd.Parameters.AddWithValue("@OutputType", printer.OutputType);

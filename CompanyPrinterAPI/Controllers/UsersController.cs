@@ -42,6 +42,23 @@ namespace CompanyPrinterAPI.Controllers
                 return "Failed to Add!!";
             }
         }
+
+        [Route("api/Users/Delete")]
+        [HttpPut]
+        public string Delete(int id)
+        {
+            try
+            {
+                userBL.deleteUser(id);
+                return "User has been deleted Successfully!!";
+            }
+            catch (Exception)
+            {
+                return "User Failed to Deleted!!";
+            }
+        }
+
+
         [Route("api/Users/SearchUser")]
         [HttpGet]
         public HttpResponseMessage Get(string username)

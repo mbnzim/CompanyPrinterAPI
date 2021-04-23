@@ -96,6 +96,18 @@ namespace Businesslogic
             }
         }
 
+        public void deleteUser(int id)
+        {
+            try
+            {
+                userDA.DeleteUsers(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public DataTable searchUser(string username)
         {
             try
