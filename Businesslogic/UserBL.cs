@@ -48,6 +48,7 @@ namespace Businesslogic
                 throw ex;
             }
         }
+
         public void deleteDesignation(int id)
         {
             try
@@ -59,6 +60,17 @@ namespace Businesslogic
                 throw ex;
             }
         }
+        //public void deleteDesignation(int id)
+        //{
+        //    try
+        //    {
+        //        userDA.DeleteDesignation(id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         //-----------------------------------User-------------------------------
         public DataTable getAllUser()
@@ -145,6 +157,17 @@ namespace Businesslogic
             }
         }
 
+        public void deletePrinterMake(int id)
+        {
+            try
+            {
+                userDA.DeletePrinterMake(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void updatePrinter(PrinterMake printerMake)
         {
             try

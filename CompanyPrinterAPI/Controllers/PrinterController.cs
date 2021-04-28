@@ -24,6 +24,7 @@ namespace CompanyPrinterAPI.Controllers
         }
 
         //Add Printer
+        [AllowAnonymous]
         public string Post(Printer printer)
         {
             try
@@ -38,6 +39,7 @@ namespace CompanyPrinterAPI.Controllers
         }
 
         //Update Printer
+        [AllowAnonymous]
         public string Put(Printer printer)
         {
             try

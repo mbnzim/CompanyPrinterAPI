@@ -13,6 +13,7 @@ namespace CompanyPrinterAPI.Controllers
     {
         UserBL userBL = new UserBL();
         //GetAll PrinterMake
+        [AllowAnonymous]
         public HttpResponseMessage Get()
         {
 
@@ -20,6 +21,7 @@ namespace CompanyPrinterAPI.Controllers
         }
 
         //Add PrinterMake
+        [AllowAnonymous]
         public string Post(PrinterMake printerMake)
         {
             try
@@ -34,6 +36,7 @@ namespace CompanyPrinterAPI.Controllers
         }
 
         //Update PrinterMake
+        [AllowAnonymous]
         public string Put(PrinterMake printerMake)
         {
             try
@@ -46,6 +49,24 @@ namespace CompanyPrinterAPI.Controllers
                 return "Failed to Update!!";
             }
         }
+
+        [AllowAnonymous]
+        [Route("api/PrinterMake/Delete")]
+        [HttpPut]
+        public string Delete(int id)
+        {
+            try
+            {
+                userBL.deletePrinterMake(id);
+                return "User has been deleted Successfully!!";
+            }
+            catch (Exception)
+            {
+                return "User Failed to Deleted!!";
+            }
+        }
+
+
 
     }
 }

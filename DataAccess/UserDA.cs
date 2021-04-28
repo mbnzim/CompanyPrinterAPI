@@ -59,13 +59,23 @@ namespace DataAccess
         public int DeleteDesignation(int id)
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("dbo.DeleteDesignation", con);
+            SqlCommand cmd = new SqlCommand("dbo.DeleteDesignations", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@designationID", id);
+            cmd.Parameters.AddWithValue("@desID", id);
             int Result = cmd.ExecuteNonQuery();
             cmd.Dispose();
             return Result;
         }
+        //public int DeleteDesignation(int id)
+        //{
+        //    con.Open();
+        //    SqlCommand cmd = new SqlCommand("dbo.DeleteDesignation", con);
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.Parameters.AddWithValue("@designationID", id);
+        //    int Result = cmd.ExecuteNonQuery();
+        //    cmd.Dispose();
+        //    return Result;
+        //}
 
         //---------------------------------------User---------------------------------------
         public DataTable GetAllUser()
@@ -181,11 +191,12 @@ namespace DataAccess
 
         public int AddPrinterMake(PrinterMake printerMake)
         {
+
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.AddPrinterMake", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@PrinterMakeName", printerMake.PrinterMakeName);
-            cmd.Parameters.AddWithValue("@Status", printerMake.Status);
+            cmd.Parameters.AddWithValue("@Status", printerMake.Status=1);
             int Result = cmd.ExecuteNonQuery();
             cmd.Dispose();
             return Result;
@@ -198,7 +209,18 @@ namespace DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@printerMakeID", printerMake.PrinterMakeID);
             cmd.Parameters.AddWithValue("@PrinterMakeName", printerMake.PrinterMakeName);
-            cmd.Parameters.AddWithValue("@Status", printerMake.Status);
+            cmd.Parameters.AddWithValue("@Status", printerMake.Status=1);
+            int Result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return Result;
+        }
+
+        public int DeletePrinterMake(int id)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("dbo.DeletePrinterMake", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@printermakeID", id);
             int Result = cmd.ExecuteNonQuery();
             cmd.Dispose();
             return Result;

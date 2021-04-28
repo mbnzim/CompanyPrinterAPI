@@ -22,6 +22,7 @@ namespace CompanyPrinterAPI.Controllers
         }
 
         //Add Document
+        [AllowAnonymous]
         public string Post(Document doc)
         {
             try
@@ -36,6 +37,7 @@ namespace CompanyPrinterAPI.Controllers
         }
 
         //Update Document
+        [AllowAnonymous]
         public string Put(Document doc)
         {
             try

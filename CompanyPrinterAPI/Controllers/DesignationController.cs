@@ -40,6 +40,7 @@ namespace CompanyPrinterAPI.Controllers
         }
 
         //Update Designation
+        [AllowAnonymous]
         public string Put(Designation designation)
         {
             try
@@ -53,17 +54,34 @@ namespace CompanyPrinterAPI.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [Route("api/Designation/Delete")]
+        [HttpPut]
         public string Delete(int id)
         {
             try
             {
                 userBL.deleteDesignation(id);
-                return "Delete Successfully!!";
+                return "User has been deleted Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Delete!!";
+                return "User Failed to Deleted!!";
             }
         }
+
+        //[AllowAnonymous]
+        //public string Delete(int id)
+        //{
+        //    try
+        //    {
+        //        userBL.deleteDesignation(id);
+        //        return "Delete Successfully!!";
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return "Failed to Delete!!";
+        //    }
+        //}
     }
 }

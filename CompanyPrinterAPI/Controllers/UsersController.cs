@@ -34,6 +34,7 @@ namespace CompanyPrinterAPI.Controllers
                 return "Failed to Add!!";
             }
         }
+        [AllowAnonymous]
         public string Put(CreateUser user)
         {
             try
@@ -46,7 +47,7 @@ namespace CompanyPrinterAPI.Controllers
                 return "Failed to Add!!";
             }
         }
-
+        [AllowAnonymous]
         [Route("api/Users/Delete")]
         [HttpPut]
         public string Delete(int id)
@@ -62,7 +63,7 @@ namespace CompanyPrinterAPI.Controllers
             }
         }
 
-
+        [AllowAnonymous]
         [Route("api/Users/SearchUser")]
         [HttpGet]
         public HttpResponseMessage Get(string username)
