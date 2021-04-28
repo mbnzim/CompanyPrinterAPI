@@ -14,6 +14,7 @@ namespace CompanyPrinterAPI.Controllers
         UserBL userBL = new UserBL();
 
         //GetAll Documents
+        [AllowAnonymous]
         public HttpResponseMessage Get()
         {
 

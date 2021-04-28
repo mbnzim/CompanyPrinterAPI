@@ -13,11 +13,15 @@ namespace CompanyPrinterAPI.Controllers
     public class UsersController : ApiController
     {
         UserBL userBL = new UserBL();
+
+         [AllowAnonymous]
+        //[Authorize]
         public HttpResponseMessage Get()
         {
             return Request.CreateResponse(HttpStatusCode.OK, userBL.getAllUser());
         }
 
+        [AllowAnonymous]
         public string Post(CreateUser user)
         {
             try

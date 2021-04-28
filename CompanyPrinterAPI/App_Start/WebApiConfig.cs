@@ -20,13 +20,12 @@ namespace CompanyPrinterAPI
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-
-
             );
 
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+           // config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+           config.Filters.Add(new AuthorizeAttribute());
         }
     }
 }

@@ -13,16 +13,18 @@ using BusinessObject;
 
 namespace CompanyPrinterAPI.Controllers
 {
+    [AllowAnonymous]
     public class DesignationController : ApiController
     {
         UserBL userBL = new UserBL();
+        [AllowAnonymous]
         //GetAll Designations
         public HttpResponseMessage Get()
         {
          
             return Request.CreateResponse(HttpStatusCode.OK, userBL.getAllDesignation());
         }
-        
+        [AllowAnonymous]
         //Add Designation
         public string Post(Designation designation)
         {

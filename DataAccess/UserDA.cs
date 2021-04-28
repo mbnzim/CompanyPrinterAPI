@@ -7,6 +7,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using BusinessObject;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace DataAccess
 {
@@ -28,8 +30,9 @@ namespace DataAccess
         }
 
         public int AddDesignation(Designation designation)
-        {         
-                con.Open();
+        {
+            designation.Status = 1;
+            con.Open();
                 SqlCommand cmd = new SqlCommand("dbo.AddDesignation", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@designationName", designation.DesignationName);
@@ -41,6 +44,7 @@ namespace DataAccess
 
         public int UpdateDesignation(Designation designation)
         {
+            designation.Status = 1;
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.UpdateDesignation", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -77,8 +81,10 @@ namespace DataAccess
         }
         public int AddUsers(CreateUser user)
         {
+  
             user.CreatedDate = DateTime.Now;
             user.LastModificationDate = DateTime.Now;
+            int status = 1;
 
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.AddNewUser", con);
@@ -91,15 +97,30 @@ namespace DataAccess
             cmd.Parameters.AddWithValue("@password", user.Password);
             cmd.Parameters.AddWithValue("@address", user.Address);
             cmd.Parameters.AddWithValue("@dob", user.DOB);
+            cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@createddate", user.CreatedDate);
             cmd.Parameters.AddWithValue("@LastModificationDate", user.LastModificationDate);
             int Result = cmd.ExecuteNonQuery();
             cmd.Dispose();
+
+           // Add user to the Application user in the identity table
+            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(userStore);
+            var appuser = new ApplicationUser() { UserName = user.UserName, Email = user.Email };
+            appuser.FirstName = user.FirstName;
+            appuser.LastName = user.LastName;
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 3
+            };
+
+            manager.Create(appuser, user.Password);
             return Result;
         }
         public int UpdateUsers(CreateUser user)
-        {   
-             user.CreatedDate = DateTime.Now;
+        {
+            int status = 1;
+            user.CreatedDate = DateTime.Now;
             user.LastModificationDate = DateTime.Now;
             con.Open();
             SqlCommand cmd = new SqlCommand("dbo.UpdateUser", con);
@@ -113,6 +134,7 @@ namespace DataAccess
             cmd.Parameters.AddWithValue("@password", user.Password);
             cmd.Parameters.AddWithValue("@address", user.Address);
             cmd.Parameters.AddWithValue("@dob", user.DOB);
+            cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@createddate", user.CreatedDate);
             cmd.Parameters.AddWithValue("@LastModificationDate", user.LastModificationDate);
             int Result = cmd.ExecuteNonQuery();
@@ -244,7 +266,7 @@ namespace DataAccess
         public DataTable GetAllDocuments()
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("dbo.GetAllDocuments", con);
+            SqlCommand cmd = new SqlCommand("dbo.GetDocumentJoin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
