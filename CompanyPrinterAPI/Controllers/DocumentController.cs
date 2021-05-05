@@ -28,11 +28,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.addDoc(doc);
-                return "Added Successfully!!";
+                return "Document added Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Add!!";
+                return "Failed to add Document!!";
             }
         }
 
@@ -43,11 +43,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.updateDoc(doc);
-                return "Update Successfully!!";
+                return "Document Updated Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Update!!";
+                return "Failed to Update Document!!";
             }
         }
     }

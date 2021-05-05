@@ -27,11 +27,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.addUser(user);
-                return "Added Successfully!!";
+                return "User added Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Add!!";
+                return "Failed to Add User!!";
             }
         }
         [AllowAnonymous]
@@ -40,11 +40,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.updateUser(user);
-                return "Added Successfully!!";
+                return "User updated Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Add!!";
+                return "Failed to update user!!";
             }
         }
         [AllowAnonymous]
@@ -55,7 +55,7 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.deleteUser(id);
-                return "User has been deleted Successfully!!";
+                return "User deleted Successfully!!";
             }
             catch (Exception)
             {

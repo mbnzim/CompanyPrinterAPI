@@ -31,11 +31,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {           
                 userBL.addDesignation(designation);
-                return "Added Successfully!!";
+                return "Designation added Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Add!!";
+                return "Failed to Add Designation!!";
             }          
         }
 
@@ -46,11 +46,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.updateDesignation(designation);
-                return "Update Successfully!!";
+                return "Designation Updated Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Update!!";
+                return "Failed to Update Designation!!";
             }
         }
 
@@ -62,11 +62,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.deleteDesignation(id);
-                return "User has been deleted Successfully!!";
+                return "Designation deleted Successfully!!";
             }
             catch (Exception)
             {
-                return "User Failed to Deleted!!";
+                return "Failed to deleted Designation!!";
             }
         }
 

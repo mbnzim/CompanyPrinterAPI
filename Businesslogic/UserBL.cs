@@ -157,17 +157,7 @@ namespace Businesslogic
             }
         }
 
-        public void deletePrinterMake(int id)
-        {
-            try
-            {
-                userDA.DeletePrinterMake(id);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+ 
         public void updatePrinter(PrinterMake printerMake)
         {
             try
@@ -180,7 +170,17 @@ namespace Businesslogic
             }
         }
 
-
+        public void deletePrinterMake(int id)
+        {
+            try
+            {
+                userDA.DeletePrinterMake(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         //-----------------------------------Printer-------------------------------
         public DataTable getAllPrinters()
         {
@@ -217,6 +217,17 @@ namespace Businesslogic
             }
         }
 
+        public void deletePrinter(int id)
+        {
+            try
+            {
+                userDA.DeletePrinter(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         //-----------------------------------Documents-------------------------------
         public DataTable getAllDocuments()
         {

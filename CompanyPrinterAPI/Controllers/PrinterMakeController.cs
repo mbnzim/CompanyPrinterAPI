@@ -27,11 +27,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.addPrinterMake(printerMake);
-                return "Added Successfully!!";
+                return "PrinterMake added Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Add!!";
+                return "Failed to add PrinterMake!!";
             }
         }
 

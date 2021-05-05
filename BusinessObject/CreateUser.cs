@@ -18,6 +18,7 @@ namespace BusinessObject
         public DateTime DOB { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastModificationDate { get; set; }
+        public int Status { get; set; }
 
         public virtual Designation Designation { get; set; }
     }

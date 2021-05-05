@@ -30,11 +30,11 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.addPrinter(printer);
-                return "Added Successfully!!";
+                return "Printer added Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Add!!";
+                return "Failed to add Printer!!";
             }
         }
 
@@ -45,12 +45,30 @@ namespace CompanyPrinterAPI.Controllers
             try
             {
                 userBL.updatePrinter(printer);
-                return "Update Successfully!!";
+                return "Printer Updated Successfully!!";
             }
             catch (Exception)
             {
-                return "Failed to Update!!";
+                return "Failed to Update Printer!!";
             }
         }
+
+
+        [AllowAnonymous]
+        [Route("api/Printer/Delete")]
+        [HttpPut]
+        public string Delete(int id)
+        {
+            try
+            {
+                userBL.deletePrinter(id);
+                return "Printer(s) deleted Successfully!!";
+            }
+            catch (Exception)
+            {
+                return "Failed to deleted Printer(s)!!";
+            }
+        }
+
     }
 }
